@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+p:hover{
+    cursor: pointer;
+    color: #2c2c2c;
+    transition: 1s;
+}
+
+header{
+    height: 10vh;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.logo{
+    padding: 20px;
+    color: #ffffff;
+}
+
+.options{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.options p{
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+
+.sair:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 910px){
+    header{
+        height: 100%;
+    }
+
+    .walletAddress{
+        width: 80vw;
+        font-size: 15px;
+    }
+}
