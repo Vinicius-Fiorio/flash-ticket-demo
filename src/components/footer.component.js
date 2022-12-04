@@ -5,7 +5,7 @@ function Footer(){
     return (
         <>
             <footer>
-                <p>Ambiente de teste | FlashTicket</p>
+                
             </footer>
         </>
     )

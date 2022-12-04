@@ -21,9 +21,10 @@ function TicketPage(props){
     //         publicKey: ""
     //     }
     // })
+    
 
     useEffect(() => {
-
+        let ingressos = []
         const settings = {
             apiKey: "SwyOoNq0tESJxnf4CEam1CGyK1Or_mGZ",
             network: Network.MATIC_MUMBAI, 
@@ -32,8 +33,8 @@ function TicketPage(props){
         const alchemy = new Alchemy(settings);
 
         setLoad(true)
+        
         async function getNftsFromUser(){
-            let ingressos = []
             //address contract 0xAc4F4FDefB5665b9477b19C335aE12F39f5d591E
             const info = await controllerFirebase.getUserInfo(props.user.id)
             // setUserInfo(info)
@@ -44,22 +45,24 @@ function TicketPage(props){
 
             if (nfts.ownedNfts.length > 0){
                 for (let index = 0; index < nfts.ownedNfts.length; index++) {
-                    if (nfts.ownedNfts[index].contract.address.toLocaleLowerCase() === ("0xAc4F4FDefB5665b9477b19C335aE12F39f5d591E").toLocaleLowerCase()){
+                    if (nfts.ownedNfts[index].contract.address.toLocaleLowerCase() === ("0xE04fF517f1f15f1569Db7f6DB616c582D0162E85").toLocaleLowerCase()){
                         ingressos.push(nfts.ownedNfts[index])
                     }
                 }
-    
-                setTickets(ingressos)
             }
+
             setLoad(false)
+            setTickets(ingressos)
         }
+        setTickets(ingressos)
         
         getNftsFromUser()
         
-    },[props.user])
+    },[])
 
+    console.log(tickets)
 
-    if (tickets === undefined){
+    if (tickets === undefined || tickets.length === 0){
         return (
             <>
                 <div className="container">
@@ -96,9 +99,9 @@ function TicketPage(props){
                             <div className="card" key={index}>
                                 <img className="imgCard" src={ticket.rawMetadata.image} alt="Avatar"/>
                                 <div className="container-card">
-                                    <h4><b>{ticket.rawMetadata.name}</b></h4> 
+                                    <h4 className="nameNft">{ticket.rawMetadata.name}</h4> 
                                     <div className="container-explorer">
-                                    <a className="explorerBlockchain" href={`https://mumbai.polygonscan.com/token/0xac4f4fdefb5665b9477b19c335ae12f39f5d591e?a=${ticket.tokenId}`} target="_blank" rel="noopener noreferrer">Ver na blockchain</a> 
+                                    <a className="explorerBlockchain" href={`https://mumbai.polygonscan.com/token/0xe04ff517f1f15f1569db7f6db616c582d0162e85?a=${ticket.tokenId}`} target="_blank" rel="noopener noreferrer">Ver na blockchain</a> 
                                     </div>
                                 </div>
                             </div>

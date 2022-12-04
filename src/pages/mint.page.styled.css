@@ -11,6 +11,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-radius: 20px;
+    margin-top: 30px;
 }
 
 .foto{
@@ -48,6 +49,7 @@ button{
     border: none;
     border-radius: 5px;
     background: blueviolet;
+    background-image: linear-gradient(39deg, rgba(121,0,95,1) 17%, rgba(255,85,0,1) 100%);
     color: #fff;
     font-size: 26px;
     font-weight: 500;
@@ -119,7 +121,6 @@ button:hover{
         display: flex;
         border-radius: 20px;
         flex-wrap: wrap;
-        margin-bottom: 200px;
     }
     .foto{
         width: 100%;
@@ -141,7 +142,6 @@ button:hover{
         display: flex;
         border-radius: 0;
         flex-wrap: wrap;
-        margin-bottom: 200px;
     }
 
     .foto img{

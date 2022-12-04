@@ -38,26 +38,27 @@ const MintPage = (props) =>{
         setLoad(true)
         try {
             const mint = await polygonSDK.api.polygonBlockchainSmartContractInvocation({
-              contractAddress: '0xAc4F4FDefB5665b9477b19C335aE12F39f5d591E',
-              methodName: 'publicMint',
-              methodABI:   {
-                "inputs": [
-                  {
-                    "internalType": "uint256",
-                    "name": "quantity",
-                    "type": "uint256"
-                  }
-                ],
-                "name": "publicMint",
-                "outputs": [
-                  
-                ],
-                "stateMutability": "nonpayable",
-                "type": "function"
-              },
-              params: [1],
-              fromPrivateKey: userInfo.wallet.privateKey,
+                contractAddress: '0xE04fF517f1f15f1569Db7f6DB616c582D0162E85',
+                methodName: 'safeMint',
+                methodABI: {
+                    "inputs": [
+                        {
+                        "internalType": "address",
+                        "name": "to",
+                        "type": "address"
+                        }
+                    ],
+                    "name": "safeMint",
+                    "outputs": [
+                        
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                params: [userInfo.wallet.address],
+                fromPrivateKey: tantumConfig.addressOwnerContract,
             })
+            
             
             console.log(mint)
             setSucess("Ingresso Resgatado com Sucesso!")
@@ -70,11 +71,7 @@ const MintPage = (props) =>{
             
         } catch (e) {
             console.log({e});
-            if (e.body.message === "Returned error: execution reverted: Numero maximo de cunhagem: 5 p/ wallet, diminua a qunatidade"){
-                setError("Execution reverted: Numero maximo de resgate: 5 p/ wallet")
-            }else{
-                setError(e.name + ": Ocorreu um erro ao resgatar ingresso, verifique se adicionou tokens em seu edereço")
-            }
+            setError(e.body.message)
             
             setLoad(false)
 
@@ -102,7 +99,6 @@ const MintPage = (props) =>{
                     Essa coleção de ingressos NFTs tem como objetivo mostrar o funcionamento do sistema de wallets custodiadas,onde temos o cuidado de integrar usuários que não tem nenhum conhecimento prévio aos serviços da web 3.0
                     </h3>
 
-                    <i className="Obs">*Antes de poder resgatar seu ingresso <a href="https://faucet.polygon.technology" target={"_blank"} rel="noreferrer" className="linkItalic">Clique aqui</a> e cole seu endereço(no cabeçalho dessa página ao lado do ícone 💳) para inserir alguns tokens ficticios em sua carteira. <br />Espere a confirmação e resgate seu ingresso!</i>
                     {
                         error != null ? 
                         <p className="messageError">{error}</p>
