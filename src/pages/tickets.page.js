@@ -8,6 +8,7 @@ function TicketPage(props){
 
     const [tickets,setTickets] = useState();
     const [loading, setLoad] = useState(false)
+    const [loadingTicket, setLoadTicket] = useState(false)
 
     // const [userInfo, setUserInfo] = useState({
     //     email: "",
@@ -21,6 +22,9 @@ function TicketPage(props){
     //         publicKey: ""
     //     }
     // })
+    async function Test(){
+        setLoadTicket(!loadingTicket)
+    }
     
 
     useEffect(() => {
@@ -41,7 +45,7 @@ function TicketPage(props){
 
             console.log(info.wallet.address)
             const nfts = await alchemy.nft.getNftsForOwner(info.wallet.address);
-            console.log(nfts.ownedNfts)
+            // console.log(nfts.ownedNfts)
 
             if (nfts.ownedNfts.length > 0){
                 for (let index = 0; index < nfts.ownedNfts.length; index++) {
@@ -57,10 +61,9 @@ function TicketPage(props){
         setTickets(ingressos)
         
         getNftsFromUser()
-        
-    },[])
+    },[loadingTicket])
 
-    console.log(tickets)
+    // console.log(tickets)
 
     if (tickets === undefined || tickets.length === 0){
         return (
@@ -81,6 +84,9 @@ function TicketPage(props){
                             <p>Você ainda não possui ingressos...</p>
                         </div>
                     }
+                    <div className="reloadSection">
+                        <input className="buttonReload" type="button" value="Atualizar Ingressos" onClick={Test}/>
+                    </div>
                 </div>
             </>
         );
@@ -101,13 +107,19 @@ function TicketPage(props){
                                 <div className="container-card">
                                     <h4 className="nameNft">{ticket.rawMetadata.name}</h4> 
                                     <div className="container-explorer">
-                                    <a className="explorerBlockchain" href={`https://mumbai.polygonscan.com/token/0xe04ff517f1f15f1569db7f6db616c582d0162e85?a=${ticket.tokenId}`} target="_blank" rel="noopener noreferrer">Ver na blockchain</a> 
+                                        <a className="explorerBlockchain" href={`https://mumbai.polygonscan.com/token/0xe04ff517f1f15f1569db7f6db616c582d0162e85?a=${ticket.tokenId}`} target="_blank" rel="noopener noreferrer">Ver na blockchain</a> 
                                     </div>
                                 </div>
                             </div>
                         );
                     })
                 }
+                </div>
+                <div className="reloadSection">
+                    <div onClick={Test}>
+                        <span className="buttonReload">Atualizar Ingressos</span>
+                    </div>
+                    
                 </div>
             </div>
         </>

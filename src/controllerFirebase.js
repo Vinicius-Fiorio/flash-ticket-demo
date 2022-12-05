@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signOut, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore, collection, getDocs, query, where, addDoc, orderBy, limit } from 'firebase/firestore/lite';
 import { TatumPolygonSDK } from '@tatumio/polygon'
 
@@ -11,19 +11,19 @@ const database = getFirestore(app)
 const polygonSDK = TatumPolygonSDK({apiKey: tantumConfig.apiKey})
 
 export default {
-    createAccount: async (email, password) =>{
-        const auth = getAuth();
-        const result = await createUserWithEmailAndPassword(auth, email, password)
+    // createAccount: async (email, password) =>{
+    //     const auth = getAuth();
+    //     const result = await createUserWithEmailAndPassword(auth, email, password)
         
-        return result 
-    },
+    //     return result 
+    // },
 
-    loginAccount: async (email,password) => {
-        const auth = getAuth();
-        const result = await signInWithEmailAndPassword(auth, email, password)
+    // loginAccount: async (email,password) => {
+    //     const auth = getAuth();
+    //     const result = await signInWithEmailAndPassword(auth, email, password)
         
-        return result
-    },
+    //     return result
+    // },
 
     authGoogle: async () => {
         const provider = new GoogleAuthProvider();

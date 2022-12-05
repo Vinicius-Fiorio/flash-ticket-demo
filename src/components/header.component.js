@@ -48,10 +48,21 @@ function Header(props){
     function visibleMenu(){
         setActive(!active)
         setCount((prv) => prv + 1)
+
+        if (active){
+            navList.current.style.display = "none";
+        }else{
+            navList.current.style.display = "flex";
+
+            let teste = document.querySelectorAll(".nav-list li")
+            teste.forEach((link) => {
+                link.style.opacity = 1
+            });
+        }
     }
 
     useEffect(() => {
-        if (active || count%2 == 0){
+        if (active || count%2 === 0){
             mobileMenu.current.classList.add("active");
             navList.current.classList.add("active");
 
@@ -68,6 +79,25 @@ function Header(props){
         }
         
     });
+
+    const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
+
+    useEffect(() => {
+        function handleResize() {
+          setWindowDimensions(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+
+        if(window.innerWidth > 999){
+            navList.current.style.display = "flex";
+        }else{
+            if (!active){
+                navList.current.style.display = "none";
+            }
+        }
+        
+        return () => window.removeEventListener('resize', handleResize);
+    }, [window.innerWidth]);
 
 
     return (

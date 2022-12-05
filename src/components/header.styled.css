@@ -119,10 +119,16 @@ nav{
     transition: 0.3s;
 }
 
+.header {
+  overflow-x: hidden;
+}
+
 @media (max-width: 999px) {
-    .header {
+
+    .header{
       overflow-x: hidden;
     }
+
     .nav-list {
       position: absolute;
       top: 8vh;
